@@ -6,15 +6,15 @@ export const getAllProducts = async () => {
 };
 
 export const addNewProduct = async (productModel: ProductModel) => {
-  return await Products.create({
-    sku: productModel.sku
-  });
+  await Products.collection.insertOne(productModel);
 };
 
 export const updateProduct = async (productModel: ProductModel) => {
-  return await Products.findOneAndUpdate(productModel);
+  await Products.findOneAndUpdate(productModel);
 };
 
-export const deleteProduct = async (sku: number) => {
-  return await Products.findByIdAndDelete(sku);
+export const deleteProduct = async (sku: string) => {
+  await Products.findOneAndDelete({
+    sku: sku
+  });
 };

@@ -1,7 +1,4 @@
-import { config } from "dotenv";
 import mongoose from "mongoose";
-
-config();
 
 export default function connectDatabase() {
   mongoose.connect(process.env.CONNECTION_STRING!);

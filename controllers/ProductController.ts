@@ -31,7 +31,8 @@ ProductController.post("/addProduct", async (req, res) => {
     let response: ResponseModel = {};
     let productModel = req.body as ProductModel;
     if (productModel) {
-      let result = await addNewProduct(productModel);
+      await addNewProduct(productModel);
+      response.Status = true;
     }
     res.send(response);
   } catch (error) {
@@ -44,7 +45,8 @@ ProductController.put("/updateProduct", async (req, res) => {
     let response: ResponseModel = {};
     let productModel = req.body as ProductModel;
     if (productModel) {
-      let result = await updateProduct(productModel);
+      await updateProduct(productModel);
+      response.Status = true;
     }
     res.send(response);
   } catch (error) {
@@ -55,10 +57,9 @@ ProductController.put("/updateProduct", async (req, res) => {
 ProductController.delete("/deleteProduct", async (req, res) => {
   try {
     let response: ResponseModel = {};
-    let sku = req.body as number;
-    if (sku) {
-      let result = await deleteProduct(sku);
-    }
+    let sku = req.query.sku as string;
+    await deleteProduct(sku);
+      response.Status = true
     res.send(response);
   } catch (error) {
     res.status(400).send(error);
